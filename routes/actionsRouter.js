@@ -52,4 +52,19 @@ router.put("/:id", (req, res) => {
     });
 });
 
+router.delete("/:id", (req, res) => {
+    const { id } = req.params;
+    Actions.remove(id)
+      .then((numberOf) => {
+        res
+          .status(200)
+          .json({
+            message: `you just deleted ${numberOf} action hope you finished it`,
+          });
+      })
+      .catch((error) => {
+        res.status(500).json({ error });
+      });
+  });
+
 module.exports = router;
